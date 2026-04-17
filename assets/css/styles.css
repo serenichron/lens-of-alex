@@ -992,3 +992,13 @@ details[open] .faq-q::after { transform: rotate(45deg); }
   width: auto;
   filter: brightness(0) invert(1);
 }
+
+/* Cross-page switch link in the top nav */
+.site-nav .nav-switch {
+  border-left: 1px solid rgba(20,20,20,.12);
+  margin-left: 0.4rem;
+  padding-left: 1.1rem !important;
+  font-style: italic;
+  letter-spacing: 0.14em;
+}
+.site-nav .nav-switch:hover { color: var(--gold); }

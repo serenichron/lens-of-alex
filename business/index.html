@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lens of Alex — Fotografie corporate, portrete de business și evenimente · București</title>
-  <meta name="description" content="Alex R. Constantinescu — fotograf corporate cu 10+ ani de experiență. Portrete de business, branding personal, evenimente corporate și fotografie de familie pentru antreprenori și companii din București." />
+  <title>Lens of Alex — Fotografie corporate &amp; branding personal · București</title>
+  <meta name="description" content="Alex R. Constantinescu — fotograf corporate cu 10+ ani de experiență. Portrete de business, branding personal, evenimente corporate și content creation pentru antreprenori și companii din București." />
   <meta name="theme-color" content="#141414" />
   <meta property="og:title" content="Lens of Alex — Fotografie care îți construiește imaginea" />
   <meta property="og:description" content="Portrete corporate, branding personal și evenimente. 10+ ani de colaborări cu HP, Forbes, Coca-Cola, Universum, Wellington." />
@@ -24,7 +24,9 @@
 ============================================================= -->
 <nav class="site-nav">
   <div class="container-xxl d-flex align-items-center justify-content-between">
-    <a href="#" class="brand">Lens of Alex</a>
+    <a href="../" class="brand-logo" aria-label="Lens of Alex — acasă">
+      <img src="https://www.lensofalex.com/wp-content/uploads/2017/12/Logo-Light-1004x290px-e1673379275260.jpg" alt="Lens of Alex">
+    </a>
     <div class="d-none d-lg-flex align-items-center">
       <a class="nav-link" href="#problema">Povestea</a>
       <a class="nav-link" href="#servicii">Servicii</a>
@@ -32,6 +34,7 @@
       <a class="nav-link" href="#portofoliu">Portofoliu</a>
       <a class="nav-link" href="#despre">Despre</a>
       <a class="nav-link" href="#faq">Întrebări</a>
+      <a class="nav-link nav-switch" href="../familie/">Familie ↗</a>
     </div>
     <a href="#contact" class="btn-ink btn-arrow d-none d-md-inline-flex">Programează call</a>
     <button class="btn btn-link d-lg-none p-0 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
@@ -43,7 +46,9 @@
 <!-- Mobile menu -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" style="background:var(--ink);color:var(--cream);">
   <div class="offcanvas-header border-bottom border-secondary">
-    <span class="brand" style="color:var(--cream);">Lens of Alex</span>
+    <a href="../" class="brand-logo" style="height:28px;">
+      <img src="https://www.lensofalex.com/wp-content/uploads/2017/12/Logo-Light-1004x290px-e1673379275260.jpg" alt="Lens of Alex">
+    </a>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
@@ -53,6 +58,7 @@
     <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="#portofoliu">Portofoliu</a>
     <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="#despre">Despre</a>
     <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="#faq">Întrebări</a>
+    <a class="nav-link d-block py-2" style="color:var(--cream);" href="../familie/">Familie ↗</a>
     <a href="#contact" class="btn-gold mt-4" data-bs-dismiss="offcanvas">Programează call</a>
   </div>
 </div>
@@ -231,7 +237,7 @@
               LinkedIn, presă și website.
             </p>
             <div class="price">De la 500 &euro; individual &nbsp;·&nbsp; 1.000 &euro; echipă</div>
-            <a href="/servicii/portrete-business" class="btn-service">Detalii pachet</a>
+            <a href="servicii/portrete-business" class="btn-service">Detalii pachet</a>
           </div>
         </article>
       </div>
@@ -249,29 +255,12 @@
               set mic de fotografii livrate imediat, restul în timp scurt.
             </p>
             <div class="price">De la 100 &euro;/oră &nbsp;·&nbsp; Livrare rapidă disponibilă</div>
-            <a href="/servicii/evenimente-corporate" class="btn-service">Detalii pachet</a>
+            <a href="servicii/evenimente-corporate" class="btn-service">Detalii pachet</a>
           </div>
         </article>
       </div>
 
-      <!-- Service 3 -->
-      <div class="col-lg-4">
-        <article class="service">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80" alt="Nuntă și eveniment familie">
-          <div class="service-body">
-            <div class="tag">Familie &amp; cupluri</div>
-            <h3>Nunți, botezuri,<br>ședințe de familie</h3>
-            <p class="mb-0 small" style="color:var(--cream-deep);">
-              Pentru oamenii care vor amintiri autentice, nu regie. Spontan,
-              emoțional, fără poze „puse în scenă".
-            </p>
-            <div class="price">De la 1.500 &euro; nuntă</div>
-            <a href="/servicii/nunti-si-familie" class="btn-service">Detalii pachet</a>
-          </div>
-        </article>
-      </div>
-
-      <!-- Service 4 -->
+      <!-- Service 3 — Content Creation -->
       <div class="col-lg-4">
         <article class="service">
           <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=900&q=80" alt="Content creation brand marketing">
@@ -283,26 +272,43 @@
               branduri cu nevoie constantă de material vizual.
             </p>
             <div class="price">Contract lunar personalizat</div>
-            <a href="/servicii/content-creation" class="btn-service">Detalii pachet</a>
+            <a href="servicii/content-creation" class="btn-service">Detalii pachet</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Service 4 — Personal branding shoot / executive portrait add-on -->
+      <div class="col-lg-4">
+        <article class="service">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=80" alt="Ședință foto LinkedIn branding personal">
+          <div class="service-body">
+            <div class="tag">LinkedIn &amp; presă</div>
+            <h3>Refresh rapid<br>portret LinkedIn</h3>
+            <p class="mb-0 small" style="color:var(--cream-deep);">
+              Ședință scurtă (60–90 min) pentru un singur headshot polish,
+              potrivit pentru profil LinkedIn, citate în presă și prezentări.
+            </p>
+            <div class="price">De la 300 &euro;</div>
+            <a href="servicii/linkedin-refresh" class="btn-service">Detalii pachet</a>
           </div>
         </article>
       </div>
 
       <!-- Service 5 — Studio mobil upsell -->
       <div class="col-lg-4">
-        <article class="service service-accent" style="background: var(--gold);">
-          <div class="service-body" style="background: none; color: var(--paper); position: static; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+        <article class="service service-accent">
+          <div class="service-body" style="background: none; position: static; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
-              <div class="tag" style="color: var(--paper);">Add-on &nbsp;·&nbsp; Noutate</div>
-              <h3 style="color: var(--paper);">Studio mobil de<br>portrete la eveniment</h3>
-              <p class="mb-0 small" style="color: rgba(255,255,255,.88);">
+              <div class="tag">Add-on &nbsp;·&nbsp; Noutate</div>
+              <h3>Studio mobil de<br>portrete la eveniment</h3>
+              <p class="mb-0 small" style="color: var(--cream-deep);">
                 Un corner de portrete business pentru participanții tăi — oferă-le
                 un headshot profesional ca parte din experiența evenimentului.
                 Diferențiator real față de fotografia clasică de conferință.
               </p>
             </div>
             <div class="pt-3">
-              <a href="/servicii/studio-mobil" class="btn-service" style="color: var(--paper); border-color: var(--paper);">Detalii pachet</a>
+              <a href="servicii/studio-mobil" class="btn-service">Detalii pachet</a>
             </div>
           </div>
         </article>
@@ -617,18 +623,30 @@
         <details class="faq-item">
           <summary class="faq-q">Ce stil de fotografiere ai?</summary>
           <div class="faq-a">
-            În principal îmi place să surprind momente naturale care se manifestă
-            spontan. La portrete business lucrez cu direcție clară, la evenimente
-            sunt aproape invizibil. Intervin atunci când este nevoie de mine.
+            La portrete de business lucrez cu direcție clară — sugerez ținute,
+            poziții, expresii. La evenimente corporate sunt aproape invizibil,
+            urmărind expresiile participanților și momentele-cheie ale
+            vorbitorilor. Intervin doar când e nevoie.
           </div>
         </details>
 
         <details class="faq-item">
-          <summary class="faq-q">Oferi discounturi?</summary>
+          <summary class="faq-q">Livrez imagini pentru LinkedIn și presă?</summary>
           <div class="faq-a">
-            Desigur, în funcție de numărul serviciilor extra contractate, prețul
-            acestora poate fi negociat. De asemenea, am și un cadou surpriză
-            pentru mirii hotărâți.
+            Da — fiecare set de portrete se livrează în trei formate: high-res
+            pentru print și site, format optimizat pentru LinkedIn
+            (1400×1400 crop pătrat) și format pentru Forbes/publicații (raport
+            editorial, spațiu pentru text).
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-q">Cum funcționează pachetul pentru echipă?</summary>
+          <div class="faq-a">
+            Studio mobil la sediu (sau un loc ales de voi), o zi de filmare,
+            toți membrii echipei primesc câte un headshot corporate + una
+            sau două opțiuni de pose. Ideal pentru rebranding, pagină de
+            site sau profile LinkedIn uniforme.
           </div>
         </details>
 
@@ -694,11 +712,14 @@
   <div class="container-xxl">
     <div class="row g-4 pb-5 border-bottom border-secondary">
       <div class="col-lg-4">
-        <div class="brand" style="color:var(--cream); font-size:1.8rem;">Lens of Alex</div>
+        <a href="../" class="brand-logo" style="height:54px;">
+          <img src="https://www.lensofalex.com/wp-content/uploads/2017/12/Logo-Light-1004x290px-e1673379275260.jpg" alt="Lens of Alex">
+        </a>
         <p class="mt-3" style="color:var(--cream-deep); max-width: 32ch;">
           Real people, real moments, real life.<br>
-          Fotografie corporate și personală din București.
+          Fotografie corporate &amp; branding personal din București.
         </p>
+        <a href="../familie/" class="fine mt-3 d-inline-block" style="color: var(--gold-bright);">Cauți fotografie de familie? ↗</a>
       </div>
       <div class="col-6 col-lg-2">
         <div class="fine mb-3">Navigare</div>
@@ -715,8 +736,8 @@
         <ul class="list-unstyled" style="line-height:2.2;">
           <li><a href="#servicii">Portrete business</a></li>
           <li><a href="#servicii">Evenimente corporate</a></li>
-          <li><a href="#servicii">Nunți &amp; familie</a></li>
-          <li><a href="#servicii">Content recurent</a></li>
+          <li><a href="#servicii">Content creation</a></li>
+          <li><a href="#servicii">Refresh LinkedIn</a></li>
           <li><a href="#servicii">Studio portrete la eveniment</a></li>
         </ul>
       </div>
