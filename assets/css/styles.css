@@ -1057,3 +1057,22 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 .offcanvas .brand-logo img,
 .footer .brand-logo img,
 .landing-logo img { display: none; }
+
+/* Problem list on dark (stakes-chapter styling) */
+.bg-ink .problem-list { border-top-color: rgba(245,241,234,.15); }
+.bg-ink .problem-row { border-bottom-color: rgba(245,241,234,.15); }
+.bg-ink .problem-row-body h3 { color: var(--cream); }
+.bg-ink .problem-row-body p { color: rgba(245,241,234,.68); }
+.bg-ink .pull-quote { color: rgba(245,241,234,.82); }
+.bg-ink .display-editorial { color: var(--cream); }
+
+/* Subtle vignette on the dark problem section to hint at "stakes" mood */
+#problema.bg-ink { position: relative; overflow: hidden; }
+#problema.bg-ink::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 0%, rgba(245,241,234,.04) 0%, transparent 55%);
+  pointer-events: none;
+}
+#problema.bg-ink > .container-xxl { position: relative; z-index: 1; }
