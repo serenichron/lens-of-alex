@@ -9,8 +9,8 @@
   --cream: #f6f6f6;         /* light gray surface (replaces beige) */
   --cream-deep: #ededed;    /* slightly darker surface */
   --paper: #ffffff;         /* pure white canvas */
-  --gold: #7a2e3d;          /* deep wine accent */
-  --gold-bright: #9a3d4d;   /* brighter wine for hover / emphasis */
+  --gold: #b73a4c;          /* saturated crimson accent — visible on white + dark */
+  --gold-bright: #e26a7c;   /* bright rose — for dark backgrounds & image overlays */
   --muted: #6b6b6b;         /* neutral cool gray text */
   --line: #e4e4e4;          /* neutral divider */
 
@@ -188,10 +188,10 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
 .btn-ink:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
 
 .btn-gold {
-  background: var(--gold); color: var(--ink); border-color: var(--gold);
+  background: var(--gold); color: var(--paper); border-color: var(--gold);
 }
-.btn-gold:hover { background: transparent; color: var(--cream); border-color: var(--cream); }
-.bg-paper .btn-gold:hover, .bg-cream .btn-gold:hover { color: var(--ink); border-color: var(--ink); }
+.btn-gold:hover { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--paper); }
+.bg-paper .btn-gold:hover, .bg-cream .btn-gold:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
 .btn-ghost {
   background: transparent; color: inherit;
@@ -209,39 +209,63 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: clamp(3rem, 6vw, 5rem) 0 clamp(4rem, 8vw, 7rem);
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(3rem, 6vw, 5rem);
   position: relative;
   overflow: hidden;
 }
-.hero .meta-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1rem;
-  align-items: end;
-  margin-top: 3rem;
-}
-.hero-img-wrap {
-  position: relative;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-}
-.hero-img-wrap img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 8s ease;
-}
-.hero-img-wrap:hover img { transform: scale(1.05); }
 
-.hero-stat {
-  border-top: 1px solid var(--ink);
-  padding-top: 1rem;
+.display-hero {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
-.hero-stat .numeric { font-size: clamp(2.5rem, 4vw, 3.5rem); }
-.hero-stat .label {
-  font-family: var(--mono);
-  font-size: 0.7rem;
+.display-hero em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.hero-stats-row {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.hero-stats-row .hero-stat {
+  padding: 1.75rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+}
+.hero-stats-row .hero-stat + .hero-stat {
+  border-left: 1px solid var(--line);
+  padding-left: 1.75rem;
+}
+.hero-stats-row .numeric {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1;
+}
+.hero-stats-row .label {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.68rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .hero-stats-row { grid-template-columns: 1fr; }
+  .hero-stats-row .hero-stat + .hero-stat {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+  }
 }
 
 /* ---------- Logo strip ---------- */
@@ -529,47 +553,59 @@ details[open] .faq-q::after { transform: rotate(45deg); }
   max-width: 62ch;
 }
 
-/* ---------- Contact form ---------- */
-.contact-grid {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: 4rem;
-  align-items: start;
+/* ---------- CTA section ---------- */
+.cta-block {
+  text-align: center;
+  max-width: 52rem;
+  margin: 0 auto;
 }
-@media (max-width: 992px) {
-  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+.cta-block .display-editorial {
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
 }
-
-.form-field {
-  display: flex; flex-direction: column;
-  margin-bottom: 1.75rem;
+.cta-block .lede {
+  color: var(--cream-deep);
+  max-width: 40rem;
+  margin: 2rem auto 0;
 }
-.form-field label {
-  font-family: var(--mono);
-  font-size: 0.72rem;
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 3rem;
+}
+.cta-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 3rem;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(245,241,234,.12);
+}
+.cta-meta-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  color: var(--cream-deep);
+}
+.cta-meta-item .label {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.68rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--cream-deep);
-  margin-bottom: .5rem;
+  color: var(--muted);
 }
-.form-field input,
-.form-field textarea,
-.form-field select {
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid rgba(245,241,234,.3);
-  padding: .75rem 0;
+.cta-meta-item a, .cta-meta-item span.value {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 1rem;
   color: var(--cream);
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  outline: none;
-  transition: border-color .2s ease;
+  text-decoration: none;
+  transition: color .2s ease;
 }
-.form-field input:focus,
-.form-field textarea:focus,
-.form-field select:focus { border-bottom-color: var(--gold-bright); }
-.form-field textarea { resize: vertical; min-height: 100px; }
-.form-field select option { background: var(--ink); color: var(--cream); }
+.cta-meta-item a:hover { color: var(--gold-bright); }
 
 /* ---------- Contact section link styling ---------- */
 #contact a { text-decoration: none; transition: color .2s ease; }

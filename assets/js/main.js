@@ -20,20 +20,3 @@ if ("IntersectionObserver" in window && sections.length) {
   sections.forEach(s => io.observe(s));
 }
 
-// Lightweight contact form feedback (no backend wired yet)
-const form = document.querySelector('form[action="#"]');
-if (form) {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('button[type="submit"]');
-    if (!btn) return;
-    const original = btn.textContent;
-    btn.textContent = "Mulțumesc! Te contactez curând.";
-    btn.setAttribute("disabled", "true");
-    form.reset();
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.removeAttribute("disabled");
-    }, 4000);
-  });
-}
