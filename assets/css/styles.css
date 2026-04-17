@@ -11,6 +11,20 @@
   --paper: #ffffff;         /* pure white canvas */
   --gold: #b8935a;          /* champagne gold — luxury accent, strong on white + dark */
   --gold-bright: #d4b07a;   /* brighter champagne — for dark backgrounds & image overlays */
+  --gold-deep: #8a6a3a;     /* deeper gold for gradient shadow */
+  --gold-light: #ead39a;    /* light highlight stop for gradients */
+  --gold-gradient: linear-gradient(135deg,
+    #ead39a 0%,
+    #d4b07a 22%,
+    #b8935a 46%,
+    #8a6a3a 62%,
+    #b8935a 78%,
+    #e3c085 100%);
+  --gold-gradient-bright: linear-gradient(135deg,
+    #f2dda8 0%,
+    #e0c078 35%,
+    #b8935a 65%,
+    #d4b07a 100%);
   --muted: #6b6b6b;         /* neutral cool gray text */
   --line: #e4e4e4;          /* neutral divider */
 
@@ -58,10 +72,31 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
   letter-spacing: -0.035em;
 }
 
+/* Gold gradient text — "background-clip: text" technique */
+.text-gold,
+.display-editorial em,
+.display-hero em,
+.pull-quote em,
+.hero-stat .numeric .plus,
+.cta-block .display-editorial em {
+  background-image: var(--gold-gradient);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+  transition: background-position 0.8s ease;
+}
+.text-gold:hover,
+.display-editorial em:hover,
+.display-hero em:hover {
+  background-position: 100% 50%;
+}
+
 .display-editorial em {
   font-style: italic;
   font-weight: 500;
-  color: var(--gold);
 }
 
 .eyebrow {
@@ -80,7 +115,7 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
   content: "";
   width: 2rem;
   height: 1px;
-  background: var(--gold);
+  background-image: linear-gradient(to right, var(--gold-deep), var(--gold-light), var(--gold));
 }
 
 .eyebrow.no-line::before { display: none; }
@@ -185,13 +220,28 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
 .btn-ink {
   background: var(--ink); color: var(--cream); border-color: var(--ink);
 }
-.btn-ink:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.btn-ink:hover {
+  background-color: var(--gold);
+  background-image: var(--gold-gradient-bright);
+  border-color: var(--gold);
+  color: var(--ink);
+}
 
 .btn-gold {
-  background: var(--gold); color: var(--ink); border-color: var(--gold);
+  background-color: var(--gold);
+  background-image: var(--gold-gradient);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  color: var(--ink);
+  border-color: var(--gold);
+  transition: background-position .6s ease, color .3s ease, border-color .3s ease;
 }
-.btn-gold:hover { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--ink); }
-.bg-paper .btn-gold:hover, .bg-cream .btn-gold:hover { background: var(--ink); border-color: var(--ink); color: var(--gold-bright); }
+.btn-gold:hover {
+  background-position: 100% 100%;
+  border-color: var(--gold-deep);
+  color: var(--ink);
+}
+.bg-paper .btn-gold:hover, .bg-cream .btn-gold:hover { background-position: 100% 100%; }
 
 .btn-ghost {
   background: transparent; color: inherit;
@@ -388,9 +438,11 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
   transition: all .2s ease;
 }
 .service .btn-service:hover {
-  background: var(--gold);
+  background-image: var(--gold-gradient);
+  background-size: 200% 200%;
+  background-position: 50% 50%;
   border-color: var(--gold);
-  color: var(--paper);
+  color: var(--ink);
 }
 .service .btn-service::after {
   content: "→";
