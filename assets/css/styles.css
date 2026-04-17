@@ -862,7 +862,7 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 .choice:hover::before { opacity: 0.45; transform: scale(1.04); }
 
 .choice-business::before {
-  background-image: url('assets/img/hero1.png');
+  background-image: url('../img/hero1.png');
 }
 .choice-familie::before {
   background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=80');
@@ -1002,3 +1002,58 @@ details[open] .faq-q::after { transform: rotate(45deg); }
   letter-spacing: 0.14em;
 }
 .site-nav .nav-switch:hover { color: var(--gold); }
+
+/* ============================================================
+   Brand wordmark — handwritten script placeholder
+   (Google Font: Sacramento. Replace with logo image later.)
+============================================================ */
+.brand-script {
+  font-family: "Sacramento", "Dancing Script", cursive;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 0.9;
+  text-decoration: none !important;
+  color: inherit;
+  display: inline-block;
+  white-space: nowrap;
+}
+.brand-script:hover { color: inherit; }
+
+/* landing hero brand */
+.landing-brand {
+  font-size: clamp(3.2rem, 6.4vw, 4.6rem);
+  color: var(--paper);
+}
+
+/* nav brand (on light nav bg) */
+.site-nav .brand-script {
+  font-size: clamp(2rem, 3vw, 2.4rem);
+  color: var(--ink);
+  line-height: 1;
+  padding: 0 0.25rem;
+}
+
+/* offcanvas brand (dark) */
+.offcanvas .brand-script {
+  font-size: 2.1rem;
+  color: var(--cream);
+  line-height: 1;
+}
+
+/* footer brand (dark) */
+.footer .brand-script {
+  font-size: 2.8rem;
+  color: var(--cream);
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Remove old logo img rules so the text isn't accidentally constrained */
+.site-nav .brand-logo,
+.offcanvas .brand-logo,
+.footer .brand-logo,
+.landing-logo { display: inline-flex; align-items: center; line-height: 1; }
+.site-nav .brand-logo img,
+.offcanvas .brand-logo img,
+.footer .brand-logo img,
+.landing-logo img { display: none; }
