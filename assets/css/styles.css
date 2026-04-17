@@ -25,6 +25,24 @@
     #e0c078 35%,
     #b8935a 65%,
     #d4b07a 100%);
+
+  /* Rose / Familie palette — for weddings, baptisms, family moments */
+  --rose: #b0596b;          /* saturated dusty rose */
+  --rose-bright: #d98c9d;   /* bright blush for dark bg */
+  --rose-deep: #7c3747;     /* deep burgundy-rose */
+  --rose-light: #f0cdd3;    /* pale blush for highlights */
+  --rose-gradient: linear-gradient(135deg,
+    #f0cdd3 0%,
+    #d98c9d 22%,
+    #b0596b 46%,
+    #7c3747 62%,
+    #b0596b 78%,
+    #e3abb8 100%);
+  --rose-gradient-bright: linear-gradient(135deg,
+    #f5d9dd 0%,
+    #e8a2b0 35%,
+    #b0596b 65%,
+    #d98c9d 100%);
   --muted: #6b6b6b;         /* neutral cool gray text */
   --line: #e4e4e4;          /* neutral divider */
 
@@ -756,3 +774,221 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 .rotate-neg { transform: rotate(-2deg); }
 .offset-up { margin-top: -4rem; }
 @media (max-width: 768px) { .offset-up { margin-top: 0; } }
+
+/* ============================================================
+   Theme override — Rose (Familie & Momente)
+============================================================ */
+.theme-rose {
+  --gold: var(--rose);
+  --gold-bright: var(--rose-bright);
+  --gold-deep: var(--rose-deep);
+  --gold-light: var(--rose-light);
+  --gold-gradient: var(--rose-gradient);
+  --gold-gradient-bright: var(--rose-gradient-bright);
+}
+
+/* ============================================================
+   Landing page
+============================================================ */
+.landing-body {
+  background: var(--ink);
+  color: var(--paper);
+  margin: 0;
+  min-height: 100vh;
+}
+
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.landing-header {
+  padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+.landing-logo {
+  display: inline-block;
+  line-height: 0;
+}
+.landing-logo img {
+  height: clamp(52px, 6vw, 76px);
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+
+.landing-tag {
+  margin: 1.2rem 0 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  letter-spacing: 0.06em;
+  color: rgba(245,241,234,0.6);
+}
+
+.landing-choice {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(245,241,234,0.1);
+  margin: 0 clamp(1.5rem, 4vw, 3rem);
+}
+
+.choice {
+  position: relative;
+  display: block;
+  background: #1a1a1a;
+  color: var(--paper);
+  padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+  text-decoration: none !important;
+  overflow: hidden;
+  transition: background .5s ease;
+}
+.choice::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  transition: opacity .5s ease, transform 8s ease;
+  z-index: 0;
+}
+.choice:hover::before { opacity: 0.45; transform: scale(1.04); }
+
+.choice-business::before {
+  background-image: url('assets/img/hero1.png');
+}
+.choice-familie::before {
+  background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=80');
+}
+
+.choice-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: clamp(26rem, 60vh, 38rem);
+}
+
+.choice-eyebrow {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(245,241,234,0.55);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.choice-eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background-image: linear-gradient(to right, var(--gold-deep), var(--gold-light), var(--gold));
+}
+.choice-familie .choice-eyebrow::before {
+  background-image: linear-gradient(to right, var(--rose-deep), var(--rose-light), var(--rose));
+}
+
+.choice-title {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 1.5rem 0;
+}
+.choice-title em {
+  font-weight: 500;
+  font-style: italic;
+  background-image: var(--gold-gradient);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+.choice-familie .choice-title em {
+  background-image: var(--rose-gradient);
+}
+
+.choice-copy {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  line-height: 1.55;
+  color: rgba(245,241,234,0.75);
+  max-width: 32rem;
+  margin: 0 0 2rem;
+}
+
+.choice-cta {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(245,241,234,0.3);
+  width: fit-content;
+  transition: border-color .4s ease, color .4s ease, gap .3s ease;
+}
+.choice:hover .choice-cta { gap: 1.2rem; border-color: var(--gold-bright); color: var(--gold-bright); }
+.choice-familie:hover .choice-cta { border-color: var(--rose-bright); color: var(--rose-bright); }
+
+.choice .arrow { transition: transform .3s ease; }
+.choice:hover .arrow { transform: translateX(6px); }
+
+.landing-footer {
+  padding: 2rem clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+  color: rgba(245,241,234,0.5);
+  font-family: var(--sans);
+  font-size: 0.78rem;
+}
+.landing-footer a { color: inherit; text-decoration: none; transition: color .2s ease; }
+.landing-footer a:hover { color: var(--gold-bright); }
+.landing-meta { margin: 0 0 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; }
+.landing-contact { margin: 0; }
+
+@media (max-width: 800px) {
+  .landing-choice { grid-template-columns: 1fr; gap: 1rem; background: transparent; margin: 0 1rem; }
+  .choice-inner { min-height: 22rem; }
+}
+
+/* Site-nav logo inside business/familie pages */
+.site-nav .brand-logo {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  text-decoration: none;
+  line-height: 0;
+}
+.site-nav .brand-logo img {
+  height: 100%;
+  width: auto;
+  filter: brightness(0);
+}
+.footer .brand-logo {
+  display: inline-flex;
+  line-height: 0;
+}
+.footer .brand-logo img {
+  height: 44px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
