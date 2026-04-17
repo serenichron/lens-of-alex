@@ -865,7 +865,7 @@ details[open] .faq-q::after { transform: rotate(45deg); }
   background-image: url('../img/hero1.png');
 }
 .choice-familie::before {
-  background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=80');
+  background-image: url('../img/hero2.png');
 }
 
 .choice-inner {
