@@ -161,6 +161,7 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
   font-size: clamp(3rem, 6vw, 5.5rem);
   line-height: 1;
   letter-spacing: -0.05em;
+  white-space: nowrap;
 }
 
 /* ---------- Sections ---------- */
@@ -212,6 +213,53 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
   position: relative;
 }
 .site-nav .nav-link:hover { color: var(--gold); }
+
+/* Nav dropdown — Servicii submenu */
+.site-nav .nav-dropdown { position: relative; display: inline-flex; }
+.site-nav .nav-dropdown .nav-link .nav-caret {
+  font-size: 0.55em; margin-left: 0.4rem;
+  display: inline-block; transition: transform .25s ease;
+  vertical-align: middle;
+}
+.site-nav .nav-dropdown:hover .nav-link .nav-caret,
+.site-nav .nav-dropdown:focus-within .nav-link .nav-caret { transform: rotate(180deg); }
+.site-nav .nav-submenu {
+  position: absolute; top: 100%; left: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  min-width: 280px;
+  padding: 0.5rem 0;
+  box-shadow: 0 12px 40px -16px rgba(20,20,20,.18);
+  opacity: 0; visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity .2s ease, visibility .2s ease, transform .2s ease;
+  z-index: 100;
+}
+.site-nav .nav-dropdown:hover .nav-submenu,
+.site-nav .nav-dropdown:focus-within .nav-submenu {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+.site-nav .nav-submenu a {
+  display: block;
+  padding: 0.7rem 1.1rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .2s ease, background .2s ease;
+}
+.site-nav .nav-submenu a:hover { color: var(--gold); background: var(--cream); }
+
+/* Mobile offcanvas — Servicii sub-links indented */
+.offcanvas .nav-sublink {
+  padding-left: 1.5rem !important;
+  font-size: 0.7rem !important;
+  opacity: 0.75;
+}
+.offcanvas .nav-sublink:hover { opacity: 1; }
 .site-nav .nav-link.active::after {
   content: "";
   position: absolute; left: .9rem; right: .9rem; bottom: .2rem;
@@ -450,15 +498,19 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
 .service img {
   position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover;
-  opacity: 0.55;
+  opacity: 0.42;
   transition: opacity .4s ease, transform 6s ease;
 }
-.service:hover img { opacity: 0.75; transform: scale(1.04); }
+.service:hover img { opacity: 0.6; transform: scale(1.04); }
 .service .service-body {
   position: relative; z-index: 2;
   padding: 2rem;
   width: 100%;
-  background: linear-gradient(to top, rgba(20,20,20,.92), rgba(20,20,20,0));
+  background: linear-gradient(to top,
+    rgba(20,20,20,1) 0%,
+    rgba(20,20,20,.92) 40%,
+    rgba(20,20,20,.55) 75%,
+    rgba(20,20,20,0) 100%);
 }
 .service h3 {
   font-size: clamp(1.4rem, 2.2vw, 1.9rem);
@@ -520,27 +572,31 @@ h1, h2, h3, h4 { font-family: var(--sans); font-weight: 600; letter-spacing: -0.
   border-color: var(--ink);
 }
 
-/* ---------- Portfolio grid ---------- */
+/* ---------- Portfolio grid (masonry) ---------- */
 .portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 120px;
-  gap: 1rem;
+  column-count: 3;
+  column-gap: 1rem;
 }
-.portfolio-grid figure { margin: 0; position: relative; overflow: hidden; }
-.portfolio-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
-.portfolio-grid figure:hover img { transform: scale(1.05); }
-
-.p-tall   { grid-column: span 4; grid-row: span 5; }
-.p-wide   { grid-column: span 8; grid-row: span 3; }
-.p-med    { grid-column: span 4; grid-row: span 3; }
-.p-small  { grid-column: span 4; grid-row: span 3; }
-.p-wide-2 { grid-column: span 8; grid-row: span 5; }
-
-@media (max-width: 768px) {
-  .portfolio-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 90px; }
-  .p-tall, .p-wide, .p-med, .p-small, .p-wide-2 { grid-column: span 6; grid-row: span 3; }
+@media (max-width: 991px) { .portfolio-grid { column-count: 2; } }
+@media (max-width: 575px) { .portfolio-grid { column-count: 1; } }
+.portfolio-grid figure {
+  margin: 0 0 1rem;
+  display: block;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
+.portfolio-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: auto 4 / 5;
+  transition: transform .6s ease;
+}
+.portfolio-grid figure:hover img { transform: scale(1.04); }
+/* Legacy .p-tall / .p-wide / etc. — kept as no-ops since masonry doesn't need
+   per-item sizing. Class names left in HTML for future reference. */
+.p-tall, .p-wide, .p-med, .p-small, .p-wide-2 { /* intentionally empty */ }
 
 /* ---------- Transformation table ---------- */
 .transform-table {
@@ -1127,12 +1183,24 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 .addon-item strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: .2rem; letter-spacing: .01em; }
 
 /* Gallery strip (service portfolio) */
-.svc-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
-@media (max-width: 767px) { .svc-gallery { grid-template-columns: repeat(2, 1fr); } }
-.svc-gallery figure { margin: 0; overflow: hidden; aspect-ratio: 3/4; }
-.svc-gallery figure:nth-child(1), .svc-gallery figure:nth-child(4) { aspect-ratio: 3/4; }
-.svc-gallery figure:nth-child(2), .svc-gallery figure:nth-child(3) { aspect-ratio: 3/4; }
-.svc-gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+/* Service-page gallery — masonry, natural aspect ratios */
+.svc-gallery { column-count: 4; column-gap: 0.5rem; }
+@media (max-width: 991px) { .svc-gallery { column-count: 3; } }
+@media (max-width: 575px) { .svc-gallery { column-count: 2; } }
+.svc-gallery figure {
+  margin: 0 0 0.5rem;
+  display: block;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.svc-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: auto 4 / 5;
+  transition: transform .6s ease;
+}
 .svc-gallery figure:hover img { transform: scale(1.04); }
 
 /* ==========================================================================
@@ -1171,15 +1239,22 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 /* Hover/focus/active/visited: keep text ink-black on every variant.
    Color isn't transitioned (snaps), so Bootstrap's link-color variable
    cannot interpolate through gold during the .25s transition window. */
-.btn-ink:hover, .btn-ink:focus, .btn-ink:active, .btn-ink:visited,
+/* Hover/focus/active: text → ink. NOTE: do NOT include :visited on .btn-ink —
+   its default color is cream, and forcing :visited to ink makes the text
+   invisible on the dark background after the link has been clicked once. */
+.btn-ink:hover, .btn-ink:focus, .btn-ink:active,
 .btn-gold:hover, .btn-gold:focus, .btn-gold:active, .btn-gold:visited,
-.btn-ghost:hover, .btn-ghost:focus, .btn-ghost:active, .btn-ghost:visited,
+.btn-ghost:hover, .btn-ghost:focus, .btn-ghost:active,
 .bg-ink .btn-ghost:hover, .bg-ink .btn-ghost:focus,
 .service .btn-service:hover, .service .btn-service:focus,
 .service.service-accent .btn-service:hover,
 .pricing-card .pricing-cta:hover, .pricing-card .pricing-cta:focus,
 .pricing-card--featured .pricing-cta:hover, .pricing-card--featured .pricing-cta:focus {
   color: var(--ink) !important;
+}
+/* Lock .btn-ink default text color so :visited can't override it to black */
+.btn-ink, .btn-ink:visited, .btn-ink:link {
+  color: var(--cream) !important;
 }
 
 /* Hover state — neutralize any solid-fill backgrounds so the ::before pseudo gradient is visible, and shift borders to gold */
@@ -1209,4 +1284,421 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 .pricing-card--featured .pricing-cta:hover {
   background: transparent;
   border-color: var(--gold);
+}
+
+/* ==========================================================================
+   Responsive — tablet and mobile refinements
+   ========================================================================== */
+
+/* Prevent any decorative or rogue element from causing lateral scroll */
+html, body { overflow-x: hidden; max-width: 100%; }
+img, figure, video { max-width: 100%; }
+h1, h2, h3, h4, h5, h6, p, li, blockquote, figcaption { overflow-wrap: break-word; word-wrap: break-word; }
+
+/* Tablet (md): 768–991px */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Pricing grid: 2 cols, featured spans full width as the headliner */
+  .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .pricing-card--featured { grid-column: 1 / -1; }
+  .pricing-card--featured .pricing-price { font-size: 3rem; }
+
+  /* Service gallery: 3 cols instead of 2 */
+  .svc-gallery { grid-template-columns: repeat(3, 1fr); }
+
+  /* Hero stats: tighter when on tablet to keep all 3 visible inline */
+  .hero-stats-row .hero-stat { padding: 1.25rem 0; gap: 0.85rem; }
+  .hero-stats-row .label { font-size: 0.62rem; }
+}
+
+/* Mobile (sm and below): <768px */
+@media (max-width: 767.98px) {
+  /* Container side padding — generous edge breathing room */
+  .container, .container-xxl, .container-fluid {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Section + hero padding tighter */
+  .section { padding: clamp(2.75rem, 8vw, 4.5rem) 0; }
+  .hero { padding: 2rem 0 1.75rem; }
+
+  /* Site nav slim down */
+  .site-nav { padding: 0.75rem 0; }
+  .site-nav .brand-script { font-size: 1.75rem; }
+
+  /* Display headlines — bump min size and let text flow naturally */
+  .display-hero { font-size: clamp(2.2rem, 8vw, 2.8rem); }
+  h2.display-editorial { font-size: clamp(1.95rem, 7vw, 2.5rem) !important; }
+  .display-hero br,
+  .display-editorial br,
+  .persona-card h3 br,
+  .choice-title br,
+  .cta-block .display-editorial br,
+  .service h3 br { display: none; }
+
+  /* Hero portrait — image fills the column width (matches buttons/text above).
+     The gold frame stays staggered, extending RIGHT into the container's padding
+     area instead of stealing width from the image. */
+  .hero-portrait { max-width: none; padding: 1.25rem 0 0 0; margin: 0; }
+  .hero-portrait::before { display: block; inset: 0 -1.5rem 1.25rem 1.25rem; }
+  .hero-portrait .caption { left: 1.25rem; bottom: -1.75rem; font-size: 0.65rem; }
+
+  /* About image — same border-overflow fix */
+  .about-img::after { display: none; }
+
+  /* About grid — collapse the 12-col template to a single column on mobile.
+     The 12 cols × 2rem column-gap (= 22rem total) was forcing an intrinsic
+     grid width wider than the mobile viewport. */
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+  /* Portfolio grid — same protection on small screens */
+  .portfolio-grid { gap: 0.5rem; }
+
+  /* Hero stats — tighter padding when stacked */
+  .hero-stats-row .hero-stat { padding: 1.1rem 0; gap: 0.85rem; }
+
+  /* Buttons — slightly compact, but keep inline-flex */
+  .btn-ink, .btn-gold, .btn-ghost {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+  }
+  .pricing-card .pricing-cta { padding: 0.7rem 1rem; font-size: 0.7rem; }
+  .service .btn-service { font-size: 0.66rem; padding: 0.6rem 1rem; }
+
+  /* CTA actions — stack and center */
+  .cta-actions { flex-direction: column; align-items: center; gap: 0.75rem; }
+
+  /* CTA meta — 1 col, centered */
+  .cta-meta {
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+    justify-items: center;
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+  .cta-meta-item { flex-direction: column; gap: 0.25rem; }
+
+  /* CTA block heading — tighter */
+  .cta-block .display-editorial { font-size: clamp(1.85rem, 7.5vw, 2.4rem); }
+
+  /* Persona cards — tighter padding */
+  .persona-card { padding: 2rem 1.5rem; }
+  .persona-card h3 { font-size: 1.4rem; }
+
+  /* Pricing cards — tighter on mobile */
+  .pricing-card { padding: 1.5rem 1.25rem; }
+  .pricing-card .pricing-price { font-size: 2rem; }
+  .pricing-card .pricing-summary { font-size: 0.88rem; margin-bottom: 0.85rem; padding-bottom: 0.85rem; }
+
+  /* Pricing add-on strip — single column, tighter */
+  .addon-strip { gap: 1.25rem; padding-top: 2rem; margin-top: 2rem; flex-direction: column; }
+
+  /* Step — stack the giant number above content for breathability */
+  .step { grid-template-columns: 1fr; gap: 0.5rem; padding: 2rem 0; }
+  .step .step-num { font-size: 2.4rem; line-height: 1; }
+  .step h3 { font-size: 1.35rem; }
+
+  /* Problem row — same stacked treatment */
+  .problem-row { grid-template-columns: 1fr; gap: 0.75rem; padding: 1.5rem 0; }
+  .problem-row-num { font-size: 1.8rem; min-width: 0; }
+
+  /* Service card — drop the fixed aspect-ratio (was clipping content on mobile)
+     so the card grows to fit its body. min-height keeps visual presence. */
+  .service { aspect-ratio: auto !important; min-height: 320px; }
+  .service .service-body { padding: 1.5rem; }
+  .service h3 { font-size: 1.3rem; }
+  .service .price { font-size: 0.9rem; }
+
+  /* Logo strip — tighter */
+  .logo-strip { padding: 1.5rem 0; }
+  .logo-strip .brand-name { font-size: 1.05rem; }
+
+  /* Transform — smaller arrow when rotated */
+  .transform-arrow { font-size: 2rem; margin: -0.25rem 0; }
+  .transform-col { padding: 1.5rem; }
+
+  /* FAQ — tighter */
+  .faq-item { padding: 1.1rem 0; }
+  .faq-q { font-size: 1.05rem; gap: 0.75rem; }
+
+  /* ----- Body text normalization: everything paragraph-ish at 14px (0.875rem)
+     so the page reads consistently on mobile. Excludes decorative micro-caps
+     (eyebrow, tag, fine, step-meta) and headings. ----- */
+  p, li, dd, blockquote,
+  .lede,
+  .faq-a,
+  .persona-card p, .persona-card li,
+  .problem-row-body p,
+  .deliv-item p,
+  .pricing-card .pricing-summary, .pricing-card li,
+  .transform-col li,
+  .service-body p, .service .price,
+  .cta-meta-item a, .cta-meta-item span.value,
+  .addon-item {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  .footer .brand-script { font-size: 2.2rem; }
+
+  /* Studio mobil section image — let it breathe; figcaption tweak handled above */
+}
+
+/* Tiny mobile: <400px — last-mile tightening */
+@media (max-width: 399.98px) {
+  .display-hero { font-size: 2rem; }
+  h2.display-editorial { font-size: 1.8rem !important; }
+  .hero-portrait { max-width: 260px; }
+  .pricing-card .pricing-price { font-size: 1.85rem; }
+  .pricing-card { padding: 1.25rem 1rem; }
+  .pricing-card li { padding: 0.3rem 0 0.3rem 1.3rem; }
+  .container, .container-xxl, .container-fluid { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .btn-ink, .btn-gold, .btn-ghost { padding: 0.75rem 1rem; font-size: 0.66rem; }
+  .step .step-num { font-size: 2rem; }
+}
+
+/* ==========================================================================
+   Portfolio — full-portfolio pages (clustered) + hub cards
+   ========================================================================== */
+
+/* Hub cards — large category previews on /business/portofoliu/ */
+.portfolio-hub-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 768px) { .portfolio-hub-grid { grid-template-columns: 1fr 1fr; } }
+.portfolio-hub-card {
+  position: relative; display: block; overflow: hidden;
+  background: var(--ink); color: var(--cream);
+  aspect-ratio: 16/10; min-height: 280px;
+  text-decoration: none !important;
+  transition: transform .4s ease;
+}
+.portfolio-hub-card img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.42;
+  transition: opacity .4s ease, transform 6s ease;
+}
+.portfolio-hub-card:hover img { opacity: 0.6; transform: scale(1.04); }
+.portfolio-hub-card .portfolio-hub-body {
+  position: absolute; inset: 0; z-index: 2;
+  padding: 2rem;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  background: linear-gradient(to top,
+    rgba(20,20,20,1) 0%,
+    rgba(20,20,20,.85) 45%,
+    rgba(20,20,20,.4) 75%,
+    rgba(20,20,20,0) 100%);
+}
+.portfolio-hub-card .portfolio-hub-body .eyebrow { color: var(--gold-bright); margin-bottom: 0.75rem; }
+.portfolio-hub-card .portfolio-hub-body .eyebrow::before { background: var(--gold-bright); }
+.portfolio-hub-card .portfolio-hub-body h2 {
+  font-weight: 400;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+  color: var(--cream);
+}
+.portfolio-hub-card .portfolio-hub-body h2 em { font-style: italic; color: var(--gold-bright); }
+.portfolio-hub-card .portfolio-hub-body .meta {
+  font-size: 0.85rem; color: rgba(245,241,234,.7); margin-bottom: 1rem;
+}
+.portfolio-hub-card .portfolio-hub-body .arrow {
+  font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-bright); font-weight: 500;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  transition: gap .25s ease;
+}
+.portfolio-hub-card:hover .portfolio-hub-body .arrow { gap: 1rem; }
+
+/* Clustered portfolio — full pages with images grouped by client */
+.portfolio-cluster { margin-bottom: clamp(3rem, 5vw, 5rem); }
+.portfolio-cluster:last-child { margin-bottom: 0; }
+.portfolio-cluster-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  padding-bottom: 1rem; margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.portfolio-cluster-head h2 {
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.portfolio-cluster-head .meta {
+  font-family: var(--sans);
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted); font-weight: 500;
+}
+/* Gallery images are clickable to open in lightbox */
+.portfolio-cluster-grid img,
+.svc-gallery img,
+.portfolio-grid img {
+  cursor: zoom-in;
+}
+
+/* Lightbox / image viewer */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.96);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 5rem;
+}
+.lightbox.open { display: flex; }
+.lightbox-image {
+  max-width: 100%;
+  max-height: calc(100vh - 8rem);
+  object-fit: contain;
+  display: block;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(245, 241, 234, 0.35);
+  color: var(--cream);
+  cursor: pointer;
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1;
+  transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s ease;
+  z-index: 2;
+  padding: 0;
+}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--cream);
+}
+.lightbox-close svg,
+.lightbox-prev svg,
+.lightbox-next svg { display: block; }
+.lightbox-close {
+  top: 1.5rem; right: 1.5rem;
+  width: 48px; height: 48px;
+  font-size: 1.6rem;
+  border-radius: 50%;
+}
+.lightbox-prev,
+.lightbox-next {
+  top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px;
+  font-size: 1.8rem;
+  border-radius: 50%;
+}
+.lightbox-prev:hover { transform: translateY(-50%) translateX(-3px); }
+.lightbox-next:hover { transform: translateY(-50%) translateX(3px); }
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+.lightbox-counter {
+  position: absolute;
+  bottom: 1.5rem; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cream-deep);
+  font-variant-numeric: tabular-nums;
+  z-index: 2;
+}
+@media (max-width: 767px) {
+  .lightbox { padding: 3.5rem 0.75rem; }
+  .lightbox-close { top: 0.75rem; right: 0.75rem; width: 40px; height: 40px; font-size: 1.3rem; }
+  .lightbox-prev, .lightbox-next { width: 44px; height: 44px; font-size: 1.4rem; }
+  .lightbox-prev { left: 0.5rem; }
+  .lightbox-next { right: 0.5rem; }
+  .lightbox-counter { bottom: 0.75rem; font-size: 0.66rem; }
+}
+
+/* Fullscreen overlay shown while gallery images are loading */
+.portfolio-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  opacity: 1;
+  transition: opacity .5s ease;
+}
+.portfolio-loader.done { opacity: 0; pointer-events: none; }
+.portfolio-loader-spinner {
+  width: 44px; height: 44px;
+  border: 2px solid var(--line);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: portfolio-loader-spin 1s linear infinite;
+  margin-bottom: 0.5rem;
+}
+.portfolio-loader-text {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.portfolio-loader-progress {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+@keyframes portfolio-loader-spin { to { transform: rotate(360deg); } }
+
+/* Full-portfolio masonry grid — natural aspect ratios, no cropping */
+.portfolio-cluster-grid {
+  column-count: 4;
+  column-gap: 0.5rem;
+}
+@media (max-width: 1199px) { .portfolio-cluster-grid { column-count: 3; } }
+@media (max-width: 767px) { .portfolio-cluster-grid { column-count: 2; } }
+@media (max-width: 399px) { .portfolio-cluster-grid { column-count: 1; } }
+.portfolio-cluster-grid figure {
+  margin: 0 0 0.5rem;
+  display: block;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.portfolio-cluster-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Reserve space before image loads — falls back to 4/5 portrait when no
+     intrinsic dimensions, but yields to natural aspect once known. Cuts CLS
+     on masonry + lazy-load drastically. */
+  aspect-ratio: auto 4 / 5;
+  transition: transform .6s ease;
+}
+.portfolio-cluster-grid figure:hover img { transform: scale(1.04); }
+
+/* Disable hover-only transforms on touch — prevents stuck states after tap */
+@media (hover: none) {
+  .problem-row:hover { padding-left: 0; }
+  .persona-card:hover { transform: none; border-color: var(--line); }
+  .service:hover img { transform: none; opacity: 0.55; }
+  .svc-gallery figure:hover img { transform: none; }
+  .portfolio-grid figure:hover img { transform: none; }
 }
