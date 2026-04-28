@@ -1,5 +1,9 @@
-// Footer year
-document.getElementById("year").textContent = new Date().getFullYear();
+// Footer year — defensive: not every page has the element, and a TypeError
+// here would kill every script below (lightbox, portfolio loader, nav state).
+(function () {
+  const el = document.getElementById("year");
+  if (el) el.textContent = new Date().getFullYear();
+})();
 
 // Active nav link based on section in view
 const navLinks = document.querySelectorAll('.site-nav .nav-link[href^="#"]');
