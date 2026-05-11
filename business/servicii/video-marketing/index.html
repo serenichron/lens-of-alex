@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Sacramento&display=swap" rel="stylesheet">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../../assets/css/styles.css?v=5" rel="stylesheet">
+  <link href="../../../assets/css/styles.css?v=14" rel="stylesheet">
 </head>
 <body>
 
@@ -24,14 +24,29 @@
   <div class="container-xxl d-flex align-items-center justify-content-between">
     <a href="../../../index.html" class="brand-script" aria-label="Lens of Alex — acasă">Lens of Alex</a>
     <div class="d-none d-lg-flex align-items-center">
-      <a class="nav-link" href="../../index.html#servicii">Servicii</a>
-      <a class="nav-link" href="../../index.html#proces">Proces</a>
+      <div class="nav-dropdown side-switcher">
+        <a class="nav-link" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">Business<span class="nav-caret">▾</span></a>
+        <div class="nav-submenu">
+          <span class="is-current" aria-current="true">Business</span>
+          <a href="../../../familie/index.html">Familie</a>
+        </div>
+      </div>
+      <a class="nav-link" href="../../index.html">Acasă</a>
+      <a class="nav-link" href="../../despre/index.html">Despre</a>
+      <div class="nav-dropdown active">
+        <a class="nav-link" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">Servicii<span class="nav-caret">▾</span></a>
+        <div class="nav-submenu">
+          <a href="../portrete-business/index.html">Portrete &amp; branding personal</a>
+          <a href="../evenimente-corporate/index.html">Foto-video evenimente corporate</a>
+          <a href="../social-media-content/index.html">Social media content</a>
+          <a href="./index.html">Video marketing</a>
+        </div>
+      </div>
       <a class="nav-link" href="../../portofoliu/index.html">Portofoliu</a>
-      <a class="nav-link" href="../../index.html#despre">Despre</a>
-      <a class="nav-link" href="#faq">Întrebări</a>
-      <a class="nav-link nav-switch" href="../../../familie/index.html">Familie ↗</a>
+      <span class="nav-link nav-link--soon" aria-disabled="true">Blog</span>
+      <span class="nav-link nav-link--soon" aria-disabled="true">Contact</span>
     </div>
-    <a href="#contact" class="btn-ink btn-arrow d-none d-md-inline-flex">Programează call</a>
+    <a href="#contact" class="btn-gold btn-arrow d-none d-md-inline-flex">Programează call</a>
     <button class="btn btn-link d-lg-none p-0 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
       <span class="font-mono small">MENIU</span>
     </button>
@@ -44,12 +59,21 @@
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
-    <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../../index.html#servicii">Servicii</a>
-    <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../../index.html#proces">Proces</a>
+    <div class="mobile-side-switcher">
+      <span class="label">Vezi</span>
+      <span class="current">Business</span>
+      <a class="switch-link" href="../../../familie/index.html">Familie</a>
+    </div>
+    <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../../index.html">Acasă</a>
+    <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../../despre/index.html">Despre</a>
+    <div class="nav-link d-block py-2" style="color:var(--cream); opacity:.7;">Servicii</div>
+    <a class="nav-link nav-sublink d-block py-1" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../portrete-business/index.html">— Portrete &amp; branding personal</a>
+    <a class="nav-link nav-sublink d-block py-1" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../evenimente-corporate/index.html">— Foto-video evenimente corporate</a>
+    <a class="nav-link nav-sublink d-block py-1" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../social-media-content/index.html">— Social media content</a>
+    <a class="nav-link nav-sublink d-block py-1" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="./index.html">— Video marketing</a>
     <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../../portofoliu/index.html">Portofoliu</a>
-    <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="../../index.html#despre">Despre</a>
-    <a class="nav-link d-block py-2" style="color:var(--cream);" data-bs-dismiss="offcanvas" href="#faq">Întrebări</a>
-    <a class="nav-link d-block py-2" style="color:var(--cream);" href="../../../familie/index.html">Familie ↗</a>
+    <span class="nav-link nav-link--soon d-block py-2" style="color:var(--cream);" aria-disabled="true">Blog</span>
+    <span class="nav-link nav-link--soon d-block py-2" style="color:var(--cream);" aria-disabled="true">Contact</span>
     <a href="#contact" class="btn-gold mt-4" data-bs-dismiss="offcanvas">Programează call</a>
   </div>
 </div>
