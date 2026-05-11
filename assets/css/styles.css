@@ -1004,9 +1004,16 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 .landing-meta { margin: 0 0 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; }
 .landing-contact { margin: 0; }
 
-@media (max-width: 800px) {
+@media (max-width: 991.98px) {
   .landing-choice { grid-template-columns: 1fr; gap: 1rem; background: transparent; margin: 0 1rem; }
   .choice-inner { min-height: 22rem; }
+}
+
+/* Tablet: about-grid runs out of room with 12 columns + 2rem gaps. Use 2-col. */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .about-grid { grid-template-columns: 5fr 7fr; gap: 1.5rem; }
+  .about-img { grid-column: 1; }
+  .about-copy { grid-column: 2; }
 }
 
 /* Site-nav logo inside business/familie pages */
@@ -1162,6 +1169,9 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 .pricing-card .pricing-name { font-size: .75rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; color: var(--muted); margin-bottom: .25rem; }
 .pricing-card .pricing-price { font-weight: 300; font-size: 2.25rem; line-height: 1.05; margin: .5rem 0 .25rem; letter-spacing: -.02em; }
 .pricing-card .pricing-price .unit { font-size: .9rem; font-weight: 400; color: var(--muted); letter-spacing: 0; margin-left: .25rem; }
+.pricing-card .pricing-price .pricing-meta { font-size: .7rem; letter-spacing: .12em; display: block; color: var(--muted); margin-top: .25rem; font-style: normal; font-weight: 500; text-transform: uppercase; }
+.pricing-card--featured .pricing-price .pricing-meta,
+.pricing-card--solo .pricing-price .pricing-meta { color: rgba(245,241,234,.62); }
 .pricing-card .pricing-summary { color: var(--muted); font-size: .9rem; line-height: 1.5; margin: 0 0 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
 .pricing-card ul { list-style: none; padding: 0; margin: 0 0 1.25rem; flex: 1; }
 .pricing-card li { padding: .35rem 0 .35rem 1.4rem; position: relative; font-size: .87rem; line-height: 1.45; }
