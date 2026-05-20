@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Sacramento&display=swap" rel="stylesheet">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../../assets/css/styles.css?v=23" rel="stylesheet">
+  <link href="../../../assets/css/styles.css?v=25" rel="stylesheet">
 </head>
 <body class="theme-rose">
 
@@ -255,6 +255,21 @@
 <!-- PACHETE -->
 <section class="section bg-paper" id="pachete">
   <div class="container-xxl">
+    <!-- ============================================================
+         COMPARAȚIE PREȚURI — varianta veche + varianta nouă.
+         Ștergeți blocul nedorit după ce clientul decide.
+    ============================================================= -->
+    <div style="border:1px dashed var(--gold-deep); background:var(--cream); padding:0.9rem 1.2rem; margin-bottom:3rem; font-family:var(--sans); font-size:0.82rem; line-height:1.55; color:var(--ink-soft);">
+      <strong style="display:block; letter-spacing:0.16em; text-transform:uppercase; font-size:0.7rem; color:var(--gold-deep); margin-bottom:0.3rem;">Notă pentru client</strong>
+      Mai jos sunt <strong>două variante</strong> de structură de preț pentru botez.
+      Comparați-le și spuneți-ne pe care o păstrăm — cealaltă se șterge.
+    </div>
+
+    <!-- ---------- VARIANTA VECHE ---------- -->
+    <div style="font-family:var(--sans); font-size:0.74rem; letter-spacing:0.22em; text-transform:uppercase; font-weight:600; color:var(--muted); padding-bottom:0.7rem; border-bottom:1px solid var(--line); margin-bottom:2.5rem;">
+      Varianta veche &nbsp;·&nbsp; pachet fix
+    </div>
+
     <div class="row g-5 mb-5 align-items-end">
       <div class="col-lg-6">
         <span class="eyebrow">03 &nbsp;—&nbsp; Pachetul</span>
@@ -322,9 +337,99 @@
           </article>
 
           <article class="package-addon">
-            <div class="package-addon-name">Tablouri înrămate</div>
+            <div class="package-addon-name">Tablou înrămat / canvas</div>
+            <div class="package-addon-price">De la 100 €</div>
+            <p class="package-addon-desc">Print premium pe pânză sau hârtie fine-art, pregătit pentru perete — moștenirea care nu rămâne pe hard-disk.</p>
+          </article>
+
+          <article class="package-addon">
+            <div class="package-addon-name">Makeup / hairstyling</div>
+            <div class="package-addon-price">De la 50 €</div>
+            <p class="package-addon-desc">Machiaj și coafură profesionale înainte de eveniment, prin colaboratori de încredere.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- VARIANTA NOUĂ ---------- -->
+    <div style="font-family:var(--sans); font-size:0.74rem; letter-spacing:0.22em; text-transform:uppercase; font-weight:600; color:var(--gold-deep); padding-bottom:0.7rem; border-bottom:1px solid var(--gold); margin:5rem 0 2.5rem;">
+      Varianta nouă &nbsp;·&nbsp; pe segmente
+    </div>
+
+    <div class="row g-5 mb-5 align-items-end">
+      <div class="col-lg-6">
+        <span class="eyebrow">03 &nbsp;—&nbsp; Pachetul</span>
+        <h2 class="display-editorial mt-4" style="font-size: clamp(2.2rem, 4.5vw, 3.8rem);">
+          Plătești pe segmente. <br><em>Nu pe pachete fixe.</em>
+        </h2>
+      </div>
+      <div class="col-lg-5 offset-lg-1">
+        <p class="lede u-max-52">
+          Botezul are pregătiri, slujbă și petrecere — nu toate familiile
+          le vor pe toate. Alegi segmentele de care ai nevoie; extra-urile
+          se adaugă separat.
+        </p>
+      </div>
+    </div>
+
+    <div class="package-grid">
+      <!-- Coverage segments -->
+      <article class="pricing-card pricing-card--solo">
+        <div class="pricing-name">Acoperire botez</div>
+        <div class="pricing-price">200<span class="unit">€</span>
+          <em class="pricing-meta">DE LA &nbsp;·&nbsp; SLUJBA LA BISERICĂ</em>
+        </div>
+        <p class="pricing-summary">
+          Alegi exact părțile zilei pe care vrei să le surprind. Fiecare
+          segment include editare profesională, livrare în 30 de zile prin
+          galerie privată online și money-back guarantee.
+        </p>
+        <ul>
+          <li>Slujba la biserică &mdash; 2h &nbsp;·&nbsp; <em style="font-style:normal; color:var(--gold-bright);">200 €</em></li>
+          <li>Pregătiri acasă &mdash; 1h &nbsp;·&nbsp; <em style="font-style:normal; color:var(--gold-bright);">100 €</em></li>
+          <li>Petrecere până la ora 18:00 &nbsp;·&nbsp; <em style="font-style:normal; color:var(--gold-bright);">200 €</em></li>
+          <li>Petrecere până la ora 00:00 &nbsp;·&nbsp; <em style="font-style:normal; color:var(--gold-bright);">400 €</em></li>
+        </ul>
+        <a href="#contact" class="pricing-cta">Solicită ofertă <span>→</span></a>
+      </article>
+
+      <!-- Add-ons sidebar -->
+      <div class="package-addons">
+        <header class="package-addons-head">
+          <span class="eyebrow">Opționale</span>
+          <h3>Adaugă <em>ce contează</em> pentru voi.</h3>
+          <p>Pentru familiile care vor mai mult — cabină foto la restaurant, album tipărit, film al evenimentului. Nimic obligatoriu.</p>
+        </header>
+
+        <div class="package-addons-list">
+          <article class="package-addon">
+            <div class="package-addon-name">Cabină foto</div>
+            <div class="package-addon-price">De la 300 €</div>
+            <p class="package-addon-desc">Minim 4 ore. Asistent, accesorii, printuri nelimitate, design personalizat, galerie privată și guest book pentru urări.</p>
+          </article>
+
+          <article class="package-addon">
+            <div class="package-addon-name">Album foto</div>
+            <div class="package-addon-price">De la 150 €</div>
+            <p class="package-addon-desc">În funcție de dimensiune și număr de pagini. Tipografie premium din București.</p>
+          </article>
+
+          <article class="package-addon">
+            <div class="package-addon-name">Servicii video</div>
             <div class="package-addon-price">De la 200 €</div>
-            <p class="package-addon-desc">Print premium pregătit pentru perete — moștenirea care nu rămâne pe hard-disk.</p>
+            <p class="package-addon-desc">Minim 2 ore. Prin colaboratori de încredere — recomand pe baza stilului și a bugetului.</p>
+          </article>
+
+          <article class="package-addon">
+            <div class="package-addon-name">Tablou înrămat / canvas</div>
+            <div class="package-addon-price">De la 100 €</div>
+            <p class="package-addon-desc">Print premium pe pânză sau hârtie fine-art, pregătit pentru perete — moștenirea care nu rămâne pe hard-disk.</p>
+          </article>
+
+          <article class="package-addon">
+            <div class="package-addon-name">Makeup / hairstyling</div>
+            <div class="package-addon-price">De la 50 €</div>
+            <p class="package-addon-desc">Machiaj și coafură profesionale înainte de eveniment, prin colaboratori de încredere.</p>
           </article>
         </div>
       </div>
@@ -656,6 +761,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../../assets/js/main.js"></script>
+<script src="../../../assets/js/main.js?v=25"></script>
 </body>
 </html>

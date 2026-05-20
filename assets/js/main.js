@@ -181,3 +181,150 @@ if ("IntersectionObserver" in window && sections.length) {
   });
 })();
 
+// =============================================================
+// Portfolio masonry
+// CSS Grid with JS placing every photo explicitly. Photos drop
+// into the shortest column, so single tiles never gap. A landscape
+// photo is promoted to a 2-column-wide tile on a cadence (~every
+// 6–8). A wide tile must start below the taller of the two columns
+// it bridges — the gap that leaves in the shorter column is closed
+// by growing the photo directly above it, which object-fit: cover
+// zooms in slightly. Result: a gap-free layout. A wide tile is
+// skipped if closing its gap would need more than a modest zoom.
+// Manual override: data-wide="true" / "false" on a <figure>.
+// =============================================================
+(function () {
+  const grids = document.querySelectorAll(".portfolio-cluster-grid");
+  if (!grids.length) return;
+
+  const GUTTER = 8;               // px — gap between tiles
+  const WIDE_CADENCE = [6, 7, 8]; // earliest a new wide tile may appear
+  const LANDSCAPE_RATIO = 1.25;   // width/height at/above this = landscape
+  const MAX_FILL_ZOOM = 0.3;      // a gap-fill photo may be zoomed at most this much
+
+  const ratioOf = (img) => {
+    if (img && img.naturalWidth && img.naturalHeight)
+      return img.naturalWidth / img.naturalHeight;
+    const w = parseFloat(img && img.getAttribute("width"));
+    const h = parseFloat(img && img.getAttribute("height"));
+    return w && h ? w / h : 0.8; // unknown → assume portrait
+  };
+
+  function layoutGrid(grid) {
+    const figures = Array.from(grid.children);
+    if (!figures.length) return;
+
+    const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    const colW = (grid.clientWidth - (cols - 1) * GUTTER) / cols;
+
+    const bottom = new Array(cols).fill(0);     // running bottom edge, px
+    const lastFig = new Array(cols).fill(null); // last photo placed per column
+    const lastH = new Array(cols).fill(0);      // its current height
+    const lastWide = new Array(cols).fill(false);
+    let since = 0;   // photos placed since the last wide tile
+    let wideN = 0;   // wide tiles placed so far (cycles the cadence)
+
+    // write a figure's column + row placement and its photo height
+    const apply = (fig, col, span, y, h) => {
+      const img = fig.querySelector("img");
+      if (img) img.style.height = h + "px";
+      fig.style.gridColumnStart = col + 1;
+      fig.style.gridColumnEnd = "span " + span;
+      fig.style.gridRowStart = Math.round(y) + 1;
+      fig.style.gridRowEnd = "span " + (h + GUTTER);
+    };
+
+    // grow column c's last photo by d px to swallow a gap (object-fit crops it)
+    const fill = (c, d) => {
+      if (d <= 0) return true;
+      if (!lastFig[c] || lastWide[c]) return false;
+      const top = bottom[c] - lastH[c] - GUTTER;
+      lastH[c] += d;
+      apply(lastFig[c], c, 1, top, lastH[c]);
+      bottom[c] += d;
+      return true;
+    };
+
+    // adjacent column pair whose heights are closest
+    const bestPair = () => {
+      let p = 0, d = Infinity;
+      for (let c = 0; c < cols - 1; c++) {
+        const diff = Math.abs(bottom[c] - bottom[c + 1]);
+        if (diff < d) { d = diff; p = c; }
+      }
+      return { p, d };
+    };
+
+    figures.forEach((fig) => {
+      const ratio = ratioOf(fig.querySelector("img"));
+      const manual = fig.dataset.wide;
+
+      // ---- decide: single column or 2-column-wide ----
+      let goWide = false, pair = 0;
+      if (cols >= 2 && manual === "true") {
+        goWide = true; pair = bestPair().p;
+      } else if (manual !== "false" && cols >= 2 && ratio >= LANDSCAPE_RATIO) {
+        const target = WIDE_CADENCE[wideN % WIDE_CADENCE.length];
+        if (since + 1 >= target) {
+          const bp = bestPair();
+          const lo = bottom[bp.p] <= bottom[bp.p + 1] ? bp.p : bp.p + 1;
+          // go wide only if the gap closes with a modest zoom
+          if (bp.d === 0 ||
+              (lastFig[lo] && !lastWide[lo] && bp.d <= MAX_FILL_ZOOM * lastH[lo])) {
+            goWide = true; pair = bp.p;
+          }
+        }
+      }
+
+      // ---- place it ----
+      if (goWide) {
+        const tall = Math.max(bottom[pair], bottom[pair + 1]);
+        fill(pair, tall - bottom[pair]);          // close the gap in the
+        fill(pair + 1, tall - bottom[pair + 1]);  // shorter column
+        const h = Math.ceil((2 * colW + GUTTER) / ratio);
+        apply(fig, pair, 2, tall, h);
+        const nb = tall + h + GUTTER;
+        bottom[pair] = bottom[pair + 1] = nb;
+        lastFig[pair] = lastFig[pair + 1] = fig;
+        lastH[pair] = lastH[pair + 1] = h;
+        lastWide[pair] = lastWide[pair + 1] = true;
+        since = 0; wideN++;
+      } else {
+        let col = 0;
+        for (let c = 1; c < cols; c++) if (bottom[c] < bottom[col]) col = c;
+        const h = Math.ceil(colW / ratio);
+        apply(fig, col, 1, bottom[col], h);
+        bottom[col] += h + GUTTER;
+        lastFig[col] = fig; lastH[col] = h; lastWide[col] = false;
+        since++;
+      }
+    });
+  }
+
+  let queued = false;
+  function relayout() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      grids.forEach(layoutGrid);
+    });
+  }
+
+  relayout(); // first pass with whatever is known so far
+  grids.forEach((grid) => {
+    grid.querySelectorAll("img").forEach((img) => {
+      if (img.complete) return;
+      img.addEventListener("load", relayout, { once: true });
+      img.addEventListener("error", relayout, { once: true });
+    });
+  });
+  window.addEventListener("load", relayout); // final pass once everything is in
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(relayout, 150);
+  });
+})();
+

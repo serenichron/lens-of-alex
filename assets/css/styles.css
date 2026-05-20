@@ -1729,6 +1729,9 @@ h1, h2, h3, h4, h5, h6, p, li, blockquote, figcaption { overflow-wrap: break-wor
 .portfolio-card-grid--lg { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 @media (min-width: 768px) { .portfolio-card-grid--lg { grid-template-columns: 1fr 1fr; } }
 
+/* 2-column variant — caps the grid at 2 columns (few cards, e.g. botezuri) */
+@media (min-width: 992px) { .portfolio-card-grid--2col { grid-template-columns: 1fr 1fr; } }
+
 /* Base card — default size (used for wedding cards) */
 .portfolio-card {
   position: relative; display: block; overflow: hidden;
@@ -1772,6 +1775,8 @@ h1, h2, h3, h4, h5, h6, p, li, blockquote, figcaption { overflow-wrap: break-wor
 
 /* Wedding pre-page cards — portrait format + couple name on its own line */
 .portfolio-card-grid .portfolio-card { aspect-ratio: 3 / 4; }
+/* Botez pre-page (2-col) — landscape cards */
+.portfolio-card-grid--2col .portfolio-card { aspect-ratio: 4 / 3; }
 .portfolio-card-couple {
   display: inline-block;
   white-space: nowrap;
@@ -2214,28 +2219,32 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
 }
 @keyframes portfolio-loader-spin { to { transform: rotate(360deg); } }
 
-/* Full-portfolio masonry grid — natural aspect ratios, no cropping */
+/* Full-portfolio masonry grid — CSS Grid; main.js explicitly places every
+   photo (column + row), so columns never gap. Natural aspect ratios, no
+   cropping; landscape photos span 2 columns only where they sit flush.
+   3 columns desktop · 2 tablet · 1 phone. */
 .portfolio-cluster-grid {
-  column-count: 4;
-  column-gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1px;     /* main.js positions every tile to the pixel */
+  column-gap: 8px;
+  row-gap: 0;              /* vertical gutter is baked into the JS placement */
+  align-items: start;
 }
-@media (max-width: 1199px) { .portfolio-cluster-grid { column-count: 3; } }
-@media (max-width: 767px) { .portfolio-cluster-grid { column-count: 2; } }
-@media (max-width: 399px) { .portfolio-cluster-grid { column-count: 1; } }
+@media (max-width: 767px) { .portfolio-cluster-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 399px) { .portfolio-cluster-grid { grid-template-columns: 1fr; } }
 .portfolio-cluster-grid figure {
-  margin: 0 0 0.5rem;
+  margin: 0;
   display: block;
   overflow: hidden;
-  break-inside: avoid;
-  page-break-inside: avoid;
+  grid-row-end: span 400;  /* pre-JS fallback; main.js overwrites per image */
 }
 .portfolio-cluster-grid img {
   width: 100%;
-  height: auto;
+  height: auto;            /* main.js sets an explicit height per photo */
   display: block;
-  /* Reserve space before image loads — falls back to 4/5 portrait when no
-     intrinsic dimensions, but yields to natural aspect once known. Cuts CLS
-     on masonry + lazy-load drastically. */
+  object-fit: cover;       /* gap-fill photos zoom in slightly to cover the tile */
+  /* Reserve a sane ratio before the image loads — cuts layout shift. */
   aspect-ratio: auto 4 / 5;
   transition: transform .6s ease;
 }
