@@ -214,7 +214,10 @@ if ("IntersectionObserver" in window && sections.length) {
     const figures = Array.from(grid.children);
     if (!figures.length) return;
 
-    const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    // JS owns the column count — 2 on phones, 3 above — and sets the grid to
+    // match, so explicit placement can't drift out of sync with the CSS.
+    const cols = window.matchMedia("(max-width: 767px)").matches ? 2 : 3;
+    grid.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
     const colW = (grid.clientWidth - (cols - 1) * GUTTER) / cols;
 
     const bottom = new Array(cols).fill(0);     // running bottom edge, px

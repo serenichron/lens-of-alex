@@ -2220,9 +2220,8 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
 @keyframes portfolio-loader-spin { to { transform: rotate(360deg); } }
 
 /* Full-portfolio masonry grid — CSS Grid; main.js explicitly places every
-   photo (column + row), so columns never gap. Natural aspect ratios, no
-   cropping; landscape photos span 2 columns only where they sit flush.
-   3 columns desktop · 2 tablet · 1 phone. */
+   photo (column + row) and sets the column count, so columns never gap.
+   3 columns on desktop & tablet · 2 on phones. */
 .portfolio-cluster-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2231,8 +2230,8 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
   row-gap: 0;              /* vertical gutter is baked into the JS placement */
   align-items: start;
 }
+/* pre-JS fallback; main.js then sets grid-template-columns to match the device */
 @media (max-width: 767px) { .portfolio-cluster-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 399px) { .portfolio-cluster-grid { grid-template-columns: 1fr; } }
 .portfolio-cluster-grid figure {
   margin: 0;
   display: block;
