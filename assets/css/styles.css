@@ -1770,6 +1770,14 @@ h1, h2, h3, h4, h5, h6, p, li, blockquote, figcaption { overflow-wrap: break-wor
 }
 .portfolio-card-title em { font-style: italic; color: var(--gold-bright); }
 
+/* Wedding pre-page cards — portrait format + couple name on its own line */
+.portfolio-card-grid .portfolio-card { aspect-ratio: 3 / 4; }
+.portfolio-card-couple {
+  display: inline-block;
+  white-space: nowrap;
+  color: var(--gold-bright);
+}
+
 .portfolio-card-meta {
   font-size: 0.85rem;
   color: rgba(245,241,234,.7);
