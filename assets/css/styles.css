@@ -1423,8 +1423,7 @@ details[open] .faq-q::after { transform: rotate(45deg); }
 
 /* Gallery strip (service portfolio) */
 /* Service-page gallery — masonry, natural aspect ratios */
-.svc-gallery { column-count: 4; column-gap: 0.5rem; }
-@media (max-width: 991px) { .svc-gallery { column-count: 3; } }
+.svc-gallery { column-count: 3; column-gap: 0.5rem; }
 @media (max-width: 575px) { .svc-gallery { column-count: 2; } }
 .svc-gallery figure {
   margin: 0 0 0.5rem;
