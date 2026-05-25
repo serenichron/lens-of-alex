@@ -2262,15 +2262,15 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
    Sits inside .package-addons on the right of .package-grid. main.js
    updates [data-total] live as the user toggles options.
    ========================================================================== */
-.xmas-calc-form { font-size: 0.92rem; }
+.xmas-calc-form { font-size: 0.85rem; line-height: 1.3; }
 .xmas-calc-group {
   border: 0;
   padding: 0;
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.85rem;
   display: grid;
   grid-template-columns: 1fr 1fr;  /* options flow in 2 columns */
-  column-gap: 0.4rem;
-  row-gap: 0.15rem;
+  column-gap: 0.5rem;
+  row-gap: 0;
 }
 @media (max-width: 575px) {
   .xmas-calc-group { grid-template-columns: 1fr; }   /* stack on phones */
@@ -2278,36 +2278,34 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
 .xmas-calc-group legend {
   grid-column: 1 / -1;             /* legend spans both columns */
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--muted);
   font-weight: 600;
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.35rem;
   padding: 0;
 }
 .xmas-calc-opt {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.5rem 0.7rem;
-  margin-bottom: 0;                /* spacing handled by grid row-gap */
-  border: 1px solid transparent;
+  gap: 0.55rem;
+  padding: 0.3rem 0.5rem;
+  margin: 0;
+  border: 0;
   border-radius: 3px;
   cursor: pointer;
-  transition: background .15s ease, border-color .15s ease;
+  transition: background .15s ease, color .15s ease;
   user-select: none;
 }
-.xmas-calc-opt:hover { background: rgba(0,0,0,0.035); }
+.xmas-calc-opt:hover { background: rgba(0,0,0,0.03); }
 .xmas-calc-opt input { accent-color: var(--gold-bright); margin: 0; flex: none; }
-.xmas-calc-opt:has(input:checked) {
-  background: rgba(0,0,0,0.04);
-  border-color: var(--gold-bright);
-}
+.xmas-calc-opt:has(input:checked) { background: rgba(0,0,0,0.04); }
 .xmas-calc-opt .lbl { flex: 1; color: var(--ink); }
+.xmas-calc-opt:has(input:checked) .lbl { color: var(--gold-bright); font-weight: 500; }
 .xmas-calc-opt .amt {
-  font-size: 0.74rem;
-  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
   color: var(--muted);
   font-weight: 600;
   white-space: nowrap;
@@ -2316,8 +2314,8 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
 .xmas-calc-opt:has(input:checked) .amt { color: var(--gold-bright); }
 
 .xmas-calc-total {
-  margin-top: 1.5rem;
-  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+  padding: 0.8rem 1.1rem;
   background: var(--ink);
   color: var(--cream);
   border-radius: 3px;
@@ -2327,31 +2325,31 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
   gap: 1rem;
 }
 .xmas-calc-total .lbl {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--cream-deep);
   font-weight: 500;
 }
 .xmas-calc-total .val {
-  font-size: 1.55rem;
+  font-size: 1.35rem;
   font-weight: 600;
   color: var(--gold-bright);
   letter-spacing: -0.01em;
   white-space: nowrap;
 }
 .xmas-calc-note {
-  margin-top: 1rem;
-  padding: 0.8rem 1rem;
-  background: rgba(0,0,0,0.04);
-  border-left: 3px solid var(--gold-bright);
-  font-size: 0.85rem;
+  margin-top: 0.7rem;
+  padding: 0.65rem 0.85rem;
+  background: rgba(0,0,0,0.03);
+  border-left: 2px solid var(--gold-bright);
+  font-size: 0.8rem;
   color: var(--ink);
-  line-height: 1.45;
+  line-height: 1.4;
 }
 .xmas-calc-foot {
-  margin-top: 0.85rem;
-  font-size: 0.72rem;
+  margin-top: 0.65rem;
+  font-size: 0.66rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
