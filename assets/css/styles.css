@@ -2256,3 +2256,93 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
   .svc-gallery figure:hover img { transform: none; }
   .portfolio-grid figure:hover img { transform: none; }
 }
+
+/* ==========================================================================
+   Xmas pricing calculator (familie/servicii/craciun)
+   Sits inside .package-addons on the right of .package-grid. main.js
+   updates [data-total] live as the user toggles options.
+   ========================================================================== */
+.xmas-calc-form { font-size: 0.92rem; }
+.xmas-calc-group { border: 0; padding: 0; margin: 0 0 1.25rem; }
+.xmas-calc-group legend {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+  padding: 0;
+}
+.xmas-calc-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.7rem;
+  margin-bottom: 0.2rem;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+  user-select: none;
+}
+.xmas-calc-opt:hover { background: rgba(0,0,0,0.035); }
+.xmas-calc-opt input { accent-color: var(--gold-bright); margin: 0; flex: none; }
+.xmas-calc-opt:has(input:checked) {
+  background: rgba(0,0,0,0.04);
+  border-color: var(--gold-bright);
+}
+.xmas-calc-opt .lbl { flex: 1; color: var(--ink); }
+.xmas-calc-opt .amt {
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.xmas-calc-opt:has(input:checked) .amt { color: var(--gold-bright); }
+
+.xmas-calc-total {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 3px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.xmas-calc-total .lbl {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cream-deep);
+  font-weight: 500;
+}
+.xmas-calc-total .val {
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--gold-bright);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.xmas-calc-note {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  background: rgba(0,0,0,0.04);
+  border-left: 3px solid var(--gold-bright);
+  font-size: 0.85rem;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.xmas-calc-foot {
+  margin-top: 0.85rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 0;
+}

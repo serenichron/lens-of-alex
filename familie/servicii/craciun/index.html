@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&family=Sacramento&display=swap" rel="stylesheet">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../../assets/css/styles.css?v=27" rel="stylesheet">
+  <link href="../../../assets/css/styles.css?v=28" rel="stylesheet">
 </head>
 <body class="theme-rose">
 
@@ -257,35 +257,36 @@
   <div class="container-xxl">
     <div class="row g-5 mb-5 align-items-end">
       <div class="col-lg-6">
-        <span class="eyebrow">03 &nbsp;—&nbsp; Pachete</span>
+        <span class="eyebrow">03 &nbsp;—&nbsp; Pachet</span>
         <h2 class="display-editorial mt-4" style="font-size: clamp(2.2rem, 4.5vw, 3.8rem);">
-          Trei pachete. <br>Tariful variază <em>după perioadă.</em>
+          Un pachet de bază. <br><em>Calculează-ți tariful exact.</em>
         </h2>
       </div>
       <div class="col-lg-5 offset-lg-1">
         <p class="lede u-max-52">
-          Toate pachetele includ aceeași experiență de bază. BASIC adaugă
-          albumul, PREMIUM adaugă întâlnirea cu Moș Crăciun. Tarifele de jos
-          sunt punct de plecare — vezi calendarul de mai jos.
+          Tariful pornește de la 600 RON și variază după perioadă, zi, număr
+          de persoane și opționalele alese. Folosește calculatorul alături
+          ca să vezi prețul exact pentru ședința ta.
         </p>
       </div>
     </div>
 
-    <div class="pricing-grid">
-      <!-- MINI -->
-      <article class="pricing-card">
-        <div class="pricing-name">Mini</div>
+    <div class="package-grid">
+      <!-- PACHET DE BAZĂ -->
+      <article class="pricing-card pricing-card--solo">
+        <div class="pricing-name">Ședință foto de Crăciun</div>
         <div class="pricing-price">600<span class="unit">RON</span>
           <em class="pricing-meta">DE LA &nbsp;·&nbsp; 50 MIN</em>
         </div>
         <p class="pricing-summary">
-          Pachetul de bază — toată experiența studioului, fără add-on-uri.
+          Toată experiența studioului — fără add-on-uri. Tariful exact
+          depinde de perioadă; calculează-l alături.
         </p>
         <ul>
           <li>4 camere complet decorate</li>
           <li>Durata 50 minute</li>
           <li>40+ fotografii editate profesional</li>
-          <li>Cel mult 4 persoane</li>
+          <li>Maxim 4 persoane (vezi calculator pentru extra)</li>
           <li>Galerie privată online</li>
           <li>Livrare în 7 zile (medie 2–3 zile)</li>
           <li>Drepturi nelimitate</li>
@@ -293,127 +294,59 @@
         <a href="#contact" class="pricing-cta">Rezervă acum <span>→</span></a>
       </article>
 
-      <!-- BASIC (featured) -->
-      <article class="pricing-card pricing-card--featured">
-        <div class="pricing-name">Basic</div>
-        <div class="pricing-price">1.000<span class="unit">RON</span>
-          <em class="pricing-meta">DE LA &nbsp;·&nbsp; CU ALBUM</em>
-        </div>
-        <p class="pricing-summary">
-          Pachetul cel mai cerut — totul din MINI plus album foto tipărit.
-        </p>
-        <ul>
-          <li>Tot din pachetul MINI</li>
-          <li>Album foto personalizat 20×20cm, 20 pagini</li>
-          <li>Coperta din piele cu design de Crăciun</li>
-          <li>Tipografie premium din București</li>
-          <li>Posibilitate de a vedea calitatea albumului în studio</li>
-        </ul>
-        <a href="#contact" class="pricing-cta">Rezervă acum <span>→</span></a>
-      </article>
+      <!-- CALCULATOR -->
+      <aside class="package-addons xmas-calc">
+        <header class="package-addons-head">
+          <span class="eyebrow">Calculator tarif</span>
+          <h3>Simulează <em>tariful tău exact.</em></h3>
+          <p>Alege perioada, ziua și opționalele — tariful se actualizează în timp real.</p>
+        </header>
 
-      <!-- PREMIUM -->
-      <article class="pricing-card">
-        <div class="pricing-name">Premium</div>
-        <div class="pricing-price">1.500<span class="unit">RON</span>
-          <em class="pricing-meta">DE LA &nbsp;·&nbsp; CU MOȘ &amp; ALBUM</em>
-        </div>
-        <p class="pricing-summary">
-          Experiența completă — album premium și 30 minute cu Moș Crăciun.
-        </p>
-        <ul>
-          <li>Tot din pachetul BASIC</li>
-          <li>Întâlnire cu Moș Crăciun (30 min)</li>
-          <li>Costum complet, barbă, burtă, tolbă</li>
-          <li>Cadouri din partea ta strecurate în sac</li>
-          <li>Opțional: dna. Crăciun sau Spiriduș (la cerere)</li>
-        </ul>
-        <a href="#contact" class="pricing-cta">Rezervă acum <span>→</span></a>
-      </article>
-    </div>
+        <form class="xmas-calc-form" autocomplete="off">
+          <fieldset class="xmas-calc-group">
+            <legend>Perioada</legend>
+            <label class="xmas-calc-opt"><input type="radio" name="period" value="600" checked> <span class="lbl">15 oct – 15 nov</span> <span class="amt">600 RON</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="period" value="700"> <span class="lbl">16 nov – 30 nov</span> <span class="amt">700 RON</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="period" value="800"> <span class="lbl">1 – 15 dec</span> <span class="amt">800 RON</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="period" value="900"> <span class="lbl">16 – 26 dec</span> <span class="amt">900 RON</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="period" value="700"> <span class="lbl">27 – 31 dec</span> <span class="amt">700 RON</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="period" value="600"> <span class="lbl">1 – 20 ian</span> <span class="amt">600 RON</span></label>
+          </fieldset>
 
-    <!-- Period pricing calendar -->
-    <div class="mt-5 pt-4" style="border-top: 1px solid var(--line);">
-      <div class="row g-4 align-items-end mb-4">
-        <div class="col-lg-6">
-          <span class="eyebrow">Calendar tarife</span>
-          <h3 class="display-editorial mt-3" style="font-size: clamp(1.6rem, 2.8vw, 2.2rem);">
-            Prețul de plecare variază <em>după perioadă.</em>
-          </h3>
-        </div>
-        <div class="col-lg-6">
-          <p class="fine" style="color: var(--muted); max-width: 56ch;">
-            Tarifele de mai jos sunt pentru pachetul MINI. La BASIC adăugați 400 RON, la PREMIUM 900 RON. Sezonul rezervărilor: 15 octombrie – 20 ianuarie.
-          </p>
-        </div>
-      </div>
+          <fieldset class="xmas-calc-group">
+            <legend>Ziua</legend>
+            <label class="xmas-calc-opt"><input type="radio" name="weekend" value="0" checked> <span class="lbl">Luni – vineri</span> <span class="amt">inclus</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="weekend" value="50"> <span class="lbl">Sâmbătă – duminică</span> <span class="amt">+50 RON</span></label>
+          </fieldset>
 
-      <div class="addon-strip">
-        <div class="addon-item">
-          <strong>15 oct – 15 nov</strong>
-          De la 600 RON
-        </div>
-        <div class="addon-item">
-          <strong>16 nov – 30 nov</strong>
-          De la 700 RON
-        </div>
-        <div class="addon-item">
-          <strong>1 dec – 15 dec</strong>
-          De la 800 RON
-        </div>
-        <div class="addon-item">
-          <strong>16 dec – 26 dec</strong>
-          De la 900 RON
-        </div>
-        <div class="addon-item">
-          <strong>27 dec – 31 dec</strong>
-          De la 700 RON
-        </div>
-        <div class="addon-item">
-          <strong>1 ian – 20 ian</strong>
-          De la 600 RON
-        </div>
-      </div>
-    </div>
+          <fieldset class="xmas-calc-group">
+            <legend>Persoane (tarif pentru maxim 4)</legend>
+            <label class="xmas-calc-opt"><input type="radio" name="people" value="0" checked> <span class="lbl">Până la 4 persoane</span> <span class="amt">inclus</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="people" value="50"> <span class="lbl">5 persoane</span> <span class="amt">+50 RON</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="people" value="100"> <span class="lbl">6 persoane</span> <span class="amt">+100 RON</span></label>
+            <label class="xmas-calc-opt"><input type="radio" name="people" value="big"> <span class="lbl">7 – 10 persoane</span> <span class="amt">la cerere</span></label>
+          </fieldset>
 
-    <!-- Add-on strip -->
-    <div class="addon-strip">
-      <div class="addon-item">
-        <strong>Avans la rezervare</strong>
-        200 RON (neretur­nabil)
-      </div>
-      <div class="addon-item">
-        <strong>Persoane suplimentare (5–6)</strong>
-        +50 RON / persoană
-      </div>
-      <div class="addon-item">
-        <strong>Animal de companie (talie mică)</strong>
-        +100 RON
-      </div>
-      <div class="addon-item">
-        <strong>Tarif weekend</strong>
-        +50 RON
-      </div>
-      <div class="addon-item">
-        <strong>Fotografii needitate</strong>
-        +250 RON (sau +200 toate)
-      </div>
-      <div class="addon-item">
-        <strong>Retuș avansat</strong>
-        50–100 RON / fotografie
-      </div>
-      <div class="addon-item">
-        <strong>Album extra</strong>
-        400 RON
-      </div>
-      <div class="addon-item">
-        <strong>Tablou înrămat / canvas</strong>
-        De la 500 RON
-      </div>
-      <div class="addon-item">
-        <strong>Makeup / hairstyling</strong>
-        De la 250 RON
-      </div>
+          <fieldset class="xmas-calc-group">
+            <legend>Opționale</legend>
+            <label class="xmas-calc-opt"><input type="checkbox" name="pet" value="100"> <span class="lbl">Animal de companie (talie mică)</span> <span class="amt">+100 RON</span></label>
+            <label class="xmas-calc-opt"><input type="checkbox" name="album" value="500"> <span class="lbl">Album foto</span> <span class="amt">+500 RON</span></label>
+            <label class="xmas-calc-opt"><input type="checkbox" name="santa" value="500"> <span class="lbl">Întâlnire cu Moș Crăciun</span> <span class="amt">+500 RON</span></label>
+            <label class="xmas-calc-opt"><input type="checkbox" name="raw" value="500"> <span class="lbl">Toate fotografiile needitate</span> <span class="amt">+500 RON</span></label>
+          </fieldset>
+
+          <div class="xmas-calc-note" data-big-note hidden>
+            Pentru 7–10 persoane, recomand programarea a 2 ședințe consecutive — scrie-mi pentru o ofertă personalizată.
+          </div>
+
+          <div class="xmas-calc-total">
+            <span class="lbl">Total estimat</span>
+            <span class="val" data-total>600 RON</span>
+          </div>
+
+          <p class="xmas-calc-foot">Avans la rezervare: 200 RON (nereturnabil).</p>
+        </form>
+      </aside>
     </div>
   </div>
 </section>
@@ -751,6 +684,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../../assets/js/main.js?v=27"></script>
+<script src="../../../assets/js/main.js?v=28"></script>
 </body>
 </html>

@@ -331,3 +331,42 @@ if ("IntersectionObserver" in window && sections.length) {
   });
 })();
 
+// =============================================================
+// Xmas pricing calculator — familie/servicii/craciun
+// Sums the chosen period + day + extra-people + opționale into
+// [data-total]. The 7–10 persoane option shows a note instead
+// of a number (recommend two consecutive sessions).
+// =============================================================
+(function () {
+  const form = document.querySelector(".xmas-calc-form");
+  if (!form) return;
+  const totalEl = form.querySelector("[data-total]");
+  const noteEl = form.querySelector("[data-big-note]");
+
+  function recalc() {
+    const periodEl = form.querySelector('input[name="period"]:checked');
+    const weekendEl = form.querySelector('input[name="weekend"]:checked');
+    const peopleEl = form.querySelector('input[name="people"]:checked');
+    const peopleVal = peopleEl ? peopleEl.value : "0";
+
+    if (peopleVal === "big") {
+      totalEl.textContent = "la cerere";
+      if (noteEl) noteEl.hidden = false;
+      return;
+    }
+    if (noteEl) noteEl.hidden = true;
+
+    let total = 0;
+    total += parseFloat(periodEl ? periodEl.value : 0) || 0;
+    total += parseFloat(weekendEl ? weekendEl.value : 0) || 0;
+    total += parseFloat(peopleVal) || 0;
+    form.querySelectorAll('input[type="checkbox"]:checked').forEach((cb) => {
+      total += parseFloat(cb.value) || 0;
+    });
+    totalEl.textContent = total.toLocaleString("ro-RO") + " RON";
+  }
+
+  form.addEventListener("change", recalc);
+  recalc();
+})();
+
