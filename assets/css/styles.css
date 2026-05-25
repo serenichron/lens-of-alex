@@ -2263,8 +2263,20 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
    updates [data-total] live as the user toggles options.
    ========================================================================== */
 .xmas-calc-form { font-size: 0.92rem; }
-.xmas-calc-group { border: 0; padding: 0; margin: 0 0 1.25rem; }
+.xmas-calc-group {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* options flow in 2 columns */
+  column-gap: 0.4rem;
+  row-gap: 0.15rem;
+}
+@media (max-width: 575px) {
+  .xmas-calc-group { grid-template-columns: 1fr; }   /* stack on phones */
+}
 .xmas-calc-group legend {
+  grid-column: 1 / -1;             /* legend spans both columns */
   font-family: 'Montserrat', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.22em;
@@ -2279,7 +2291,7 @@ select.form-input { appearance: none; -webkit-appearance: none; background-image
   align-items: center;
   gap: 0.65rem;
   padding: 0.5rem 0.7rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0;                /* spacing handled by grid row-gap */
   border: 1px solid transparent;
   border-radius: 3px;
   cursor: pointer;
